@@ -1,60 +1,38 @@
 import peewee
 
-db = peewee.SqliteDatabase(":memory:")
+db = peewee.SqliteDatabase("betsy.db")
 
-
-class Tag(peewee.Model):
+class Meta(peewee.Model):
+        database = db
+        
+class Tag(Meta):
     tag = peewee.CharField(unique=True)
     description = peewee.CharField(null = True)
 
-    class Meta:
-        database = db
-
-
-class Product(peewee.Model):
+class Product(Meta):
     name = peewee.CharField()
     description = peewee.CharField()
     tags = peewee.ManyToManyField(Tag)
     unit_price_cents = peewee.IntegerField()
     amount_in_stock = peewee.IntegerField()
 
-    class Meta:
-        database = db
-
-
-
-class User(peewee.Model):
+class User(Meta):
     email = peewee.CharField(unique=True)
     name = peewee.CharField()
     address = peewee.CharField()
     billing_information = peewee.CharField()
     products = peewee.ManyToManyField(Product)
 
-    class Meta:
-        database = db
-
-
-class Sale(peewee.Model):
+class Sale(Meta):
     buyer = peewee.ForeignKeyField(User, null = False)
     seller = peewee.ForeignKeyField(User, null = False)
     product_purchased = peewee.ForeignKeyField(Product, null = False)
     quantity = peewee.IntegerField(null = False)
 
-    class Meta:
-        database = db
-
-
-class ProductTag(peewee.Model):
+class ProductTag(Meta):
     product = peewee.ForeignKeyField(Product, null = False)
     tag = peewee.ForeignKeyField(Tag, null = False)
 
-    class Meta:
-        database = db
-
-
-class UserProduct(peewee.Model):
+class UserProduct(Meta):
     user = peewee.ForeignKeyField(User, null = False)
     product = peewee.ForeignKeyField(Product, null = False)
-
-    class Meta:
-        database = db
