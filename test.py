@@ -86,7 +86,7 @@ def add_test_purchases():
 
 def add_test_purchases2():
     test_purchases = [
-        [get_product_id(3), get_user_id(6), 1],
+        [3, 6, 1],
     ]
     for purchase in test_purchases:
         main.purchase_product(purchase[0], purchase[1], purchase[2])
@@ -97,10 +97,10 @@ def add_test_purchases2():
 BaseTestCase.setUp(BaseTestCase)
 
 # Create content in database
-# create_test_users()
-# add_test_product()
-# add_test_purchases()
-# add_test_purchases2()
+create_test_users()
+add_test_product()
+add_test_purchases()
+add_test_purchases2()
 
 # Search in name case insensitive and attempts spellcheck
 # print (main.search('ShiRt'))
@@ -127,4 +127,4 @@ BaseTestCase.setUp(BaseTestCase)
 # print([product for product in models.UserProduct.select()])
 
 # Clear the test database
-# BaseTestCase.tearDown(BaseTestCase)
+#BaseTestCase.tearDown(BaseTestCase)

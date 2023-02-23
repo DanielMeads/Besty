@@ -58,6 +58,7 @@ def list_products_per_tag(tag):
 
 def add_product_to_catalog(user_id, product):
     # Requires a user name or ID i.e "Trevor" and a List of product information i.e.['ProductName', 'Description', [List of Tags], Price in cents, Amount]
+    user_id = get_user_id(user_id)
     new_product = Product.create(
         name=product[0],
         description=product[1],
